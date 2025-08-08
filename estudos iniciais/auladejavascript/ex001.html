@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 001 Js</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Olá, Mundo! estou praticando Js</h1>
+    <h2>Identificador de numero par ou impar</h2>
+    <input type="number" id="btn1" placeholder="digite um numero">
+    <button id="btn">Verificar Par ou Impar</button>
+    <p id="res"></p>
+    <script> 
+        document.getElementById('btn').addEventListener('click',Verificar);
+
+        function Verificar() {
+    var n = Number(document.getElementById("btn1").value);
+    var res = document.getElementById("res");
+
+    if (n % 2 == 0) {
+        res.innerHTML = 'O numero ' + n + ' é par';
+    }
+    else { 
+        res.innerHTML = 'O numero ' + n + ' é impar';
+    }
+
+}    </script>
+</body>
+</html>
