@@ -1,14 +1,12 @@
- document.getElementById('btn').addEventListener('click' Verificar);
+function converter() {
+    let celsius = document.getElementById("celsius").value;
+    celsius = parseFloat(celsius);
 
-        function Verificar() {
-    var n = Number(document.getElementById("btn1").value);
-    var res = document.getElementById("res");
+    let fahrenheit = (celsius * 9/5) + 32;
 
-    if (n % 2 == 0) {
-        res.innerHTML = 'O numero' + n + ' é par';
+    document.getElementById("resultado").innerText = ${celsius}"°C" = ${fahrenheit.tofixed(2)}"°F";
+
+    if (isNaN(celsius)) {
+        document.getElementById("resultado").innerText = "Digite uma temperatura valida"; return;
     }
-    else { 
-        res.innerHTML = 'O numero ' + n + ' é impar';
-    }
-
-}  
+}
