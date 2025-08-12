@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="detalheProduto"></main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        async function carregarDetalhes() {
+            const resposta = await fetch(`https://fakestoreapi.com/products/${id}`);
+            const produto = await resposta.json();
+
+            document.getElementById('detalheProduto').innerHTML = `
+                <h1>${produto.title}</h1>
+                <img src="${produto.image}" alt="${produto.title}">
+                <p>${produto.description}</p>
+                <p>R$ ${(produto.price * 5).toFixed(2)}</p>
+                <button onclick="window.history.back()">Voltar</button>
+            `;
+        }
+        carregarDetalhes();
+    </script>    
+</body>
+</html>
