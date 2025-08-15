@@ -1,0 +1,39 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Barattie - Loja</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-logo">Barattie</div>
+
+    <nav class="site-nav" aria-label="Categorias">
+      <!-- Links normais para acessibilidade (JS melhora o comportamento) -->
+      <a href="category.html?cat=all" data-cat="all">Todos</a>
+      <a href="category.html?cat=men's clothing" data-cat="men's clothing">Roupas Masculinas</a>
+      <a href="category.html?cat=women's clothing" data-cat="women's clothing">Roupas Femininas</a>
+      <a href="category.html?cat=electronics" data-cat="electronics">Eletrônicos</a>
+    </nav>
+
+    <div class="header-right">
+      <input type="search" id="search" placeholder="Buscar produto...">
+      <button id="searchBtn">Buscar</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Produtos em destaque</h2>
+    <div id="produtos" class="grid-produtos"></div>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 Barattie - Todos os direitos reservados
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
