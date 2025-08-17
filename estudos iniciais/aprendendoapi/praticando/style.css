@@ -15,6 +15,29 @@ body {
     padding: 20px;
     text-align: center;
 }
+.menu-categorias {
+    background-color: #222;
+    padding: 10px 0;
+}
+.menu-categorias ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.menu-categorias li {
+    display: inline;
+}
+.menu-categorias a {
+    color: #f5f6f8;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.menu-categorias a:hover {
+    background-color: #0f766e;
+    border-radius: 5px;
+}
 .container {
     max-width: 1500px;
     margin: 24px auto;
@@ -35,6 +58,8 @@ body {
     flex-direction: column;
     gap: 8px;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 .cartao:hover {
     transform: translateY(-10px);
@@ -51,6 +76,7 @@ body {
 .cartao h3 {
     font-size: 14px;
     margin-top: 6px;
+    
 }
 .cartao p.preço {
     color: #0f766e;

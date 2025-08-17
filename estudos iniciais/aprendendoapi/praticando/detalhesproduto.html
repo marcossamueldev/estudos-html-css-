@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do produtos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .detalhes-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 24px auto;
+            padding: 16px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(16, 24, 40, 0.06);
+            ;
+        }
+        .imagem-produto {
+            flex: 1;
+            padding: 16px;
+            background: #f5f6f8;
+            border-radius: 16px;
+        }
+        .imagem-produto img {
+            max-width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+        }
+        .info-produto {
+            flex: 2;
+            padding: 16px;
+        }
+        .info-produto h2 {
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .info-produto p {
+            margin-bottom: 8px;
+        }
+        .info-produto .preço {
+            font-size: 24px;
+            color: #0f766e;
+            font-weight: bold;
+        }
+        .btn-comprar {
+            background-color: #05941d;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        .btn-comprar:hover {
+            background-color: #09701a;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo">Loja Barattie</h1>
+    </header>
+    <section class="container">
+        <div id="detalhes-produtos" class="detalhes-container"></div>
+    </section>
+    <script src="detalhesproduto.js"></script>
+</body>
+</html>
