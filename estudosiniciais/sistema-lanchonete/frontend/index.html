@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardapio - Sistema lanchonete</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Cardapio da lanchonete</h1>
+        <button id="abrirCarrinho">Carrinho</button>
+    </header>
+    <main id="lista-produtos">
+        <!-- Produtos serão carregados aqui via JavaScript -->
+    </main>
+
+    <div id="modal-carrinho" class="hidden">
+        <div class="modal-content">
+            <h2>Carrinho</h2>
+            <ul id="itens-carrinho"></ul>
+            <p id="total">Total: R$ 0,00</p>
+            <button id="fecharCarrinho">Fechar</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
