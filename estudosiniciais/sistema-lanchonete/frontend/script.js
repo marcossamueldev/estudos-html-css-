@@ -1,56 +1,66 @@
-// Lista de produtos (por enquanto fixa)
-const produtos = [
-    { id: 1, nome: "X-Salada", preco: 12.90 },
-    { id: 2, nome: "X-Bacon", preco: 15.90 },
-    { id: 3, nome: "Açaí 500ml", preco: 18.00 },
-    { id: 4, nome: "Batata Frita", preco: 10.00 }
-];
+document.addEventListener("DOMContentLoaded", () => {
+    const produtos = [
+        { id: 1, nome: "X-Salada", preco: 12.50 },
+        { id: 2, nome: "X-Bacon", preco: 15.00 },
+        { id: 3, nome: "Coca-Cola Lata", preco: 6.00 },
+        { id: 4, nome: "Batata Frita", preco: 10.00 }
+    ];
 
-const listaProdutos = document.getElementById("lista-produtos");
-const abrirCarrinho = document.getElementById("abrirCarrinho");
-const fecharCarrinho = document.getElementById("fecharCarrinho");
-const modalCarrinho = document.getElementById("modal-carrinho");
-const itensCarrinho = document.getElementById("itens-carrinho");
-const totalEl = document.getElementById("total");
+    const lista = document.getElementById("produtos-list");
 
-let carrinho = [];
-
-// Carregar produtos na tela
-produtos.forEach(produto => {
-    const card = document.createElement("div");
-    card.classList.add("card-produto");
-
-    card.innerHTML = `
-        <h3>${produto.nome}</h3>
-        <p>R$ ${produto.preco.toFixed(2)}</p>
-        <button onclick="addCarrinho(${produto.id})">Adicionar</button>
-    `;
-
-    listaProdutos.appendChild(card);
+    produtos.forEach(prod => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+        div.innerHTML = `
+            <h3>${prod.nome}</h3>
+            <p>R$ ${prod.preco.toFixed(2)}</p>
+            <button class="btn-add">Adicionar</button>
+        `;
+        lista.appendChild(div);
+    });
 });
+let cart = [];
 
-// Função adicionar ao carrinho
-function addCarrinho(id) {
-    const produto = produtos.find(p => p.id === id);
-    carrinho.push(produto);
-    atualizarCarrinho();
+function addToCart(item) {
+    const existing = cart.find(p => p.nome === item.nome);
+
+    if (existing) {
+        existing.qtd++;
+    } else {
+        cart.push({ ...item, qtd: 1 });
+    }
+
+    renderCart();
 }
 
-function atualizarCarrinho() {
-    itensCarrinho.innerHTML = "";
+function renderCart() {
+    const cartList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartList.innerHTML = "";
+
     let total = 0;
 
-    carrinho.forEach(item => {
-        total += item.preco;
-
+    cart.forEach(prod => {
         const li = document.createElement("li");
-        li.innerText = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-        itensCarrinho.appendChild(li);
+        const subtotal = prod.preco * prod.qtd;
+        total += subtotal;
+
+        li.innerHTML = `
+            ${prod.nome} (x${prod.qtd}) - R$ ${subtotal.toFixed(2)}
+            <button onclick="removeFromCart('${prod.nome}')">Remover</button>
+        `;
+        cartList.appendChild(li);
     });
 
-    totalEl.innerText = `Total: R$ ${total.toFixed(2)}`;
+    cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
-// Abrir e fechar modal
-abrirCarrinho.onclick = () => modalCarrinho.classList.remove("hidden");
-fecharCarrinho.onclick = () => modalCarrinho.classList.add("hidden");
+function removeFromCart(nome) {
+    cart = cart.filter(prod => prod.nome !== nome);
+    renderCart();
+}
+document.getElementById("checkout-btn").addEventListener("click", () => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.location.href = "checkout.html";
+});

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Pedido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Finalizar Pedido</h1>
+
+    <div class="checkout-container">
+
+        <h2>Dados do Cliente</h2>
+        <form id="checkout-form">
+
+            <label>Nome:</label>
+            <input type="text" id="nome" required>
+
+            <label>Endereço:</label>
+            <input type="text" id="endereco" required>
+
+            <label>Forma de Pagamento:</label>
+            <select id="pagamento">
+                <option>Dinheiro</option>
+                <option>Pix</option>
+                <option>Cartão de Crédito</option>
+                <option>Cartão de Débito</option>
+            </select>
+
+            <label>Observações:</label>
+            <textarea id="obs"></textarea>
+
+            <h2>Resumo do Pedido</h2>
+            <ul id="resumo"></ul>
+            <p id="total-final"></p>
+
+            <button type="submit">Enviar Pedido</button>
+        </form>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>
