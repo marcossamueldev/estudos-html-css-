@@ -35,14 +35,34 @@ app.get('/test-db', async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+const ExpirationAlertService = require("./services/ExpirationAlertService");
+
+ExpirationAlertService.getExpirationAlerts()
+  .then(alerts => console.log(alerts))
+  .catch(err => console.error(err));
+const expirationAlertRoutes = require("./routes/expirationAlertRoutes");
+
+app.use("/alerts", expirationAlertRoutes);
+const stockAlertRoutes = require('./routes/stockAlertRoutes');
+
+app.use('/stock', stockAlertRoutes);
+
 
 // Porta
 const PORT = process.env.PORT || 3001;
 const ingredientRoutes = require('./routes/ingredientRoutes');
 
 app.use('/ingredients', ingredientRoutes);
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Backend da lanchonete está funcionando",
+  });
+});
+
 
 // Inicialização do servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
