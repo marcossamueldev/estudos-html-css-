@@ -21,6 +21,9 @@ const productRoutes = require('./routes/productRoutes');
 
 app.use('/products', productRoutes);
 
+const stockBatchRoutes = require('./routes/stockBatchRoutes');
+
+app.use('/batches', stockBatchRoutes);
 
 const db = require('./config/database');
 
