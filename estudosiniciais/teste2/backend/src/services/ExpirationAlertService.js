@@ -2,19 +2,29 @@ const db = require('../config/database');
 
 class ExpirationAlertService {
   static async getExpirationAlerts() {
-    const query = `
-      SELECT 
-        i.name AS ingredient,
-        b.quantity,
-        b.expiration_date,
-        DATEDIFF(b.expiration_date, CURDATE()) AS days_to_expire
-      FROM stock_batches b
-      JOIN ingredients i ON i.id = b.ingredient_id
-      WHERE b.expiration_date <= DATE_ADD(CURDATE(), INTERVAL 1 DAY)
-    `;
+    const query = ` 
+    SELECT 
+  i.name AS ingredient,
+  sb.quantity,
+  sb.expiration_date,
+  i.unit_cost,
+  DATEDIFF(sb.expiration_date, CURDATE()) AS days_to_expire
+FROM stock_batches sb
+JOIN ingredients i ON i.id = sb.ingredient_id
+WHERE sb.expiration_date <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+`;
+    const alertsWithLoss = alerts.map(item => {
+      const loss =
+        item.days_to_expire <= 0
+          ? item.quantity * item.unit_cost
+          : 0;
 
-    const [rows] = await db.query(query);
-    return rows;
+      return {
+        ...item,
+        loss: Number(loss.toFixed(2)),
+      };
+    });
+    return alertsWithLoss;
   }
 }
 

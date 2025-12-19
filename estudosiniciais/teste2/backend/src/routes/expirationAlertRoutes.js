@@ -1,7 +1,8 @@
 const express = require("express");
-const router = express.Router();
 const ExpirationAlertController = require("../controllers/ExpirationAlertController");
 
-router.get("/expiration", ExpirationAlertController.index);
+const router = express.Router();
+
+router.get("/expiration", ExpirationAlertController.getExpirationAlerts);
 
 module.exports = router;
