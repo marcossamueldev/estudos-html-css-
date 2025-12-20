@@ -1,68 +1,25 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const saleRoutes = require('./routes/saleRoutes');
 
-
-
-const app = express();
-
-// Middlewares
-app.use(cors());
-app.use(express.json());
-app.use('/sales', saleRoutes);
-
-
-// Rota de teste
-app.get('/', (req, res) => {
-  res.send('API do Sistema de Restaurante rodando corretamente');
-});
 const productRoutes = require('./routes/productRoutes');
-
-app.use('/products', productRoutes);
-
+const orderRoutes = require('./routes/orderRoutes');
+const kitchenRoutes = require('./routes/kitchenRoutes');
 const stockBatchRoutes = require('./routes/stockBatchRoutes');
-
-app.use('/batches', stockBatchRoutes);
-
-const db = require('./config/database');
-
-app.get('/test-db', async (req, res) => {
-  try {
-    await db.query('SELECT 1');
-    res.json({ success: true, message: 'Conexão com MySQL funcionando' });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-const ExpirationAlertService = require("./services/ExpirationAlertService");
-
-ExpirationAlertService.getExpirationAlerts()
-  .then(alerts => console.log(alerts))
-  .catch(err => console.error(err));
-const expirationAlertRoutes = require("./routes/expirationAlertRoutes");
-
-app.use("/alerts", expirationAlertRoutes);
+const expirationAlertRoutes = require('./routes/expirationAlertRoutes');
 const stockAlertRoutes = require('./routes/stockAlertRoutes');
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
+app.use('/kitchen', kitchenRoutes);
+app.use('/batches', stockBatchRoutes);
+app.use('/alerts', expirationAlertRoutes);
 app.use('/stock', stockAlertRoutes);
 
+app.get('/health', (req,res) => res.json({status:'ok'}));
 
-// Porta
-const PORT = process.env.PORT || 3001;
-const ingredientRoutes = require('./routes/ingredientRoutes');
-
-app.use('/ingredients', ingredientRoutes);
-app.get("/health", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "Backend da lanchonete está funcionando",
-  });
-});
-
-
-// Inicialização do servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
-
+module.exports = app;
